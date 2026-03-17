@@ -54,7 +54,8 @@ def generate_launch_description():
             ]
         ),
         launch_arguments={
-            "gz_args": ["-r -v4 ", world],
+            # "gz_args": ["-r -v4 ", world],
+            "gz_args": ["-s -r -v1 ", world],
             "on_exit_shutdown": "true",
         }.items(),
     )
@@ -63,7 +64,7 @@ def generate_launch_description():
     spawn_entity = Node(
         package="ros_gz_sim",
         executable="create",
-        arguments=["-topic", "robot_description", "-name", "my_bot", "-z", "0.1"],
+        arguments=["-topic", "robot_description", "-name", "my_bot", "-z", "0.05"],
         output="screen",
     )
 
@@ -93,6 +94,16 @@ def generate_launch_description():
         arguments=["joint_broad"],
     )
 
+    twist_mux_params = os.path.join(
+        get_package_share_directory(package_name), "config", "twist_mux.yaml"
+    )
+    twist_mux = Node(
+        package="twist_mux",
+        executable="twist_mux",
+        parameters=[twist_mux_params],
+        remappings=[("/cmd_vel_out", "/cmd_vel")],
+    )
+
     # Launch them all!
     return LaunchDescription(
         [
@@ -103,5 +114,6 @@ def generate_launch_description():
             ros_gz_bridge,
             diff_drive_spawner,
             joint_broad_spawner,
+            twist_mux,
         ]
     )

@@ -34,18 +34,18 @@
             <visualize>false</visualize>
             <update_rate>10</update_rate>
             <topic>scan</topic>
-            <gz_frame_id>laser_frame</gz_frame_id>   <!-- ← 改这里，frame_id → gz_frame_id -->
+            <gz_frame_id>laser_frame</gz_frame_id>
             <lidar>
                 <scan>
                     <horizontal>
-                        <samples>360</samples>
+                        <samples>500</samples>
                         <min_angle>-3.14159</min_angle>
                         <max_angle>3.14159</max_angle>
                     </horizontal>
                 </scan>
                 <range>
-                    <min>0.3</min>
-                    <max>12</max>
+                    <min>0.0699</min>
+                    <max>5.0001</max>
                 </range>
             </lidar>
         </sensor>

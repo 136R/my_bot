@@ -23,7 +23,7 @@ def generate_launch_description():
     # 创建robot_state_publisher节点
     params = {
         "robot_description": robot_description_config,
-        "use_sim_time": use_sim_time,
+        "use_sim_time": True,
     }
     node_robot_state_publisher = Node(
         package="robot_state_publisher",

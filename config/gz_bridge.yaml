@@ -45,3 +45,18 @@
   ros_type_name: "sensor_msgs/msg/PointCloud2"
   gz_type_name: "gz.msgs.PointCloudPacked"
   direction: GZ_TO_ROS
+
+
+# 方式A：单独话题（优先，精确）
+- ros_topic_name: /gz/model/my_bot/pose
+  gz_topic_name: /model/my_bot/pose
+  ros_type_name: geometry_msgs/msg/PoseStamped
+  gz_type_name: gz.msgs.Pose
+  direction: GZ_TO_ROS
+
+# 方式B：备用，PoseArray（脚本自动用 index=9）
+- ros_topic_name: /world_poses
+  gz_topic_name: /world/default/pose/info
+  ros_type_name: geometry_msgs/msg/PoseArray
+  gz_type_name: gz.msgs.Pose_V
+  direction: GZ_TO_ROS
